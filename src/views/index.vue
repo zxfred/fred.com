@@ -11,14 +11,16 @@
 
             <!-- sidebar start -->
             <div class="sidebar">
-                <div v-for="(slide, index) in slides" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
+                <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
             </div>
             <!-- sidebar stop -->
 
-            <div v-for="(slide, index) in slides" :key="slide.first" class="title-zone">
-                <h1 class="txt">{{slide.first}}</h1>
-                <h2 class="txt">{{slide.sec}}</h2>
+            <!-- info start -->
+            <div v-for="(slide, index) in slides" :key="index" class="info-zone">
+                <h1 class="txt">{{slide.title}}</h1>
+                <h2 class="txt">{{slide.desc}}</h2>
             </div>
+            <!-- info stop -->
             
         </div>
 
@@ -146,8 +148,7 @@ export default {
             background-repeat: no-repeat;
             background-position: bottom;
         }
-        .title-zone {
-            padding-bottom: 2rem;
+        .info-zone {
             overflow:hidden;
             h1{
                 font-size: .50rem;
