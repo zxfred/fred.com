@@ -16,9 +16,11 @@
             <!-- sidebar stop -->
 
             <!-- info start -->
-            <div v-for="(slide, index) in slides" :key="index" class="info-zone">
-                <h1 class="txt">{{slide.title}}</h1>
-                <h2 class="txt">{{slide.desc}}</h2>
+            <div class="info-zone">
+                <div class="info-holder" v-for="(slide, index) in slides" :key="index"> 
+                    <h1 class="txt">{{slide.title}}</h1>
+                    <h2 class="txt">{{slide.desc}}</h2>
+                </div>
             </div>
             <!-- info stop -->
             
@@ -151,22 +153,23 @@ export default {
         .info-zone {
             overflow:hidden;
             min-height: 30%;
-            z-index: 1;
-            h1{
-                font-size: .50rem;
-                line-height: .68rem;
-                color: #000;
-                margin-bottom: .28rem;
-                overflow:hidden;
-            }
-            h2{
-                font-size: .23rem;
-                line-height: .39rem;
-                color: #fff;
-                font-weight: light;
-                vertical-align: top;
-                overflow:hidden;
-                font-weight: lighter;
+            .info-holder {
+                h1{
+                    font-size: .50rem;
+                    line-height: .68rem;
+                    color: #000;
+                    margin-bottom: .28rem;
+                    overflow:hidden;
+                }
+                h2{
+                    font-size: .23rem;
+                    line-height: .39rem;
+                    color: #fff;
+                    font-weight: light;
+                    vertical-align: top;
+                    overflow:hidden;
+                    font-weight: lighter;
+                }
             }
         }
     }
