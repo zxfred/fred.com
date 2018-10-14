@@ -150,6 +150,8 @@ export default {
         }
         .info-zone {
             overflow:hidden;
+            min-height: 30%;
+            z-index: 1;
             h1{
                 font-size: .50rem;
                 line-height: .68rem;
@@ -157,7 +159,6 @@ export default {
                 margin-bottom: .28rem;
                 overflow:hidden;
             }
-
             h2{
                 font-size: .23rem;
                 line-height: .39rem;
