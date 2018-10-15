@@ -154,17 +154,17 @@ export default {
             overflow:hidden;
             min-height: 30%;
             .info-holder {
-                h1{
+                h1 {
                     font-size: .50rem;
                     line-height: .68rem;
-                    color: #000;
+                    color: #ddd;
                     margin-bottom: .28rem;
                     overflow:hidden;
                 }
-                h2{
+                h2 {
                     font-size: .23rem;
                     line-height: .39rem;
-                    color: #fff;
+                    color: #000;
                     font-weight: light;
                     vertical-align: top;
                     overflow:hidden;
