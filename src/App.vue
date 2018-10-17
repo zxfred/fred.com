@@ -5,7 +5,8 @@
 </template>
 
 <style lang="stylus">
-#app
-  height 100%
-  position relative
+#app {
+    height: 100%;
+    position: relative;
+}
 </style>
