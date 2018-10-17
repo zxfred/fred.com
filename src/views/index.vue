@@ -1,120 +1,106 @@
 <template>
 	<div class="main-container">
 
-        <div class="header">
-            <div v-for="item in navList" :key="item.name" :class="{active : active == item.name}" class="item" @click="selectNav(item.name)">{{item.name}}
-                <div class="indicator"></div>
-            </div>
-        </div>
+        <!-- nav start -->
+        <my-header></my-header>
+        <!-- nav stop -->
 
         <div class="content-container" v-bind:style="bgStyle">
 
-            <img class="bg-img" :src="bgSrc" v-bind:style="bgImgStyle" alt="">
-            <img class="bg-img" src="https://p.upyun.com/demo/tmp/NInuZMbH.png" style="display:none">
+            <div class="image-zone" :style="backgroundStyle"></div>
 
-            <div class="side-bar">
-                <div class="item" @click="changeBgColor('#fa6653')">01</div>
-                <div class="item" @click="changeBgColor('#42d0b4')">02</div>
-                <div class="item" @click="changePage">03</div>
-                <div class="item" @click="changeTitle">04</div>
+            <!-- sidebar start -->
+            <div class="sidebar">
+                <div v-for="(slide, index) in slides" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
             </div>
+            <!-- sidebar stop -->
 
-            <div class="title-zone" :class="{ 'top-out': titleAni.topOut, 'top-in': titleAni.topIn, 'bottom-out': titleAni.bottomOut, 'bottom-in': titleAni.bottomIn }">
-                <h1 class="txt">{{title.first}}</h1>
-                <h2 class="txt">{{title.sec}}</h2>
+            <div v-for="(slide, index) in slides" :key="slide.first" class="title-zone">
+                <h1 class="txt">{{slide.first}}</h1>
+                <h2 class="txt">{{slide.sec}}</h2>
             </div>
+            
         </div>
 
 	</div>
 </template>
 <script>
+import Header from '../components/header.vue'
+
 export default {
-    name: 'index',
+    name: 'indexPage',
     components: {
+        'my-header': Header
     },
     data: function () {
         return {
-            navList: [{
-                name: 'tab1',
-            },
-            {
-                name: 'tab2',
-            },
-            {
-                name: 'tab3',
+            slides: [{
+                    title: '这是第一个大标题',
+                    desc: 'This is the desc 1. This is the desc 1. This is the desc 1.',
+                    bgColor: '#ebc042', // 黄色
+                    patternUrl: '../assets/bro.png',
+                },
+                {
+                    title: '这是第二个大标题',
+                    desc: 'This is the desc 2. This is the desc 2. This is the desc 2.',
+                    bgColor: '#41ace7', // 蓝色
+                    patternUrl: '../assets/dear.png',
+                },
+                {
+                    title: '这是第三个大标题',
+                    desc: 'This is the desc 3. This is the desc 3. This is the desc 3.',
+                    bgColor: '#f96554', // 红色
+                    patternUrl: '../assets/dog.png',
+                },
+                {
+                    title: '这是第四个大标题',
+                    desc: 'This is the desc 4. This is the desc 4. This is the desc 4.',
+                    bgColor: '#43d0b4', // 绿色
+                    patternUrl: '../assets/nike.png',
             }],
-            title: {
-                first: '这是一个大标题',
-                sec: 'At the strawberry music festival, What "good" things did we do?',
+            backgroundStyle: {
+                backgroundImage: 'url(' + require('../assets/dog.png') + ')',
             },
-            titleAni: {
-                topOut: false,
-                topIn: false,
-                bottomOut: false,
-                bottomIn: false,
-            },
-            active: '',
-            bgImgStyle: {
-                opacity: 0.1,
-            },
-            bgSrc: '../src/assets/nike.png',
             bgStyle: {
                 backgroundColor: '#42d0b4',
             },
-            count: 0,
-            show: false,
         }
     },
     beforeCreate () {
     },
     mounted () {
+        
     },
     computed: {
     },
     watch: {
     },
     methods: {
-        changePage: function () {
-            this.changeBgImg()
-            this.changeBgColor('#9e4ced')
-            this.changeTitle()
+        selectSlide: function (color, url) {
+            this.changeBgColor()
+            // this.changeBgImg()
+            // this.changeTitle()
         },
         changeBgImg: function () {
             let that = this
             this.bgImgStyle.opacity = 0
-            setTimeout(function () {
-                let img = new Image()
-                img.onload = function () {
-                    that.bgSrc = 'https://p.upyun.com/demo/tmp/uwCjN7nD.png'
-                    that.bgImgStyle.opacity = 0.1
-                }
-                img.src = 'https://p.upyun.com/demo/tmp/uwCjN7nD.png'
-            }, 333)
         },
         changeBgColor: function (color) {
             this.bgStyle.backgroundColor = color
         },
-        changeTitle: function () {
+        changeTitle: function (a) {
             let that = this
-            this.titleAni.bottom = true
-            setTimeout(function () {
-                that.title.first = '这是第二个大标题'
-                that.title.sec = 'At the strawberry music festival, What "good" things did we do?'.split('').reverse().join('')
-                that.titleAni.bottomOut = false
-                that.titleAni.topIn = true
-            }, 400)
-        },
-        selectNav: function (name) {
-            this.active = name
+            if (a == 1) {
+                this.imgClass = 'top trans-out'
+            } else {
+                this.imgClass = 'trans-in'
+            }
         },
     },
 }
 </script>
 
 <style lang="stylus">
-    // @import '../common/stylus/one.styl'
-    // @import '../common/stylus/omit.styl'
-
     .main-container {
         height: 100%;
         position: relative;
@@ -122,8 +108,7 @@ export default {
         flex-direction: column;
     }
 
-    // sidebar
-    .side-bar {
+    .sidebar {
         position: absolute;
         right: 0;
         height: 100%;
@@ -134,50 +119,11 @@ export default {
         .item {
             height: .6rem;
             color: white;
+            line-height: .6rem;
             text-align: center;
             overflow: hidden;
             transition: color 333ms cubic-bezier(.215,.61,.355,1);
         }
-    }
-
-    // header
-    .header {
-        height: 1.04rem;
-        background-color: #ffffff;
-        padding: 0 1.81rem;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .header .item {
-        display: inline-block;
-        width: 1.04rem;
-        height: 100%;
-        font-family: FZLTZHK--GBK1-0;
-        font-size: .22rem;
-        line-height: .22rem;
-        color: #000000;
-        text-align: center;
-        padding-top: .39rem;
-        box-sizing: border-box;
-        position: relative;
-    }
-
-    .header .item .indicator{
-        height: .04rem;
-        width: 100%;
-        border-radius: .02rem;
-        position: absolute;
-        bottom: .29rem;
-        background-color: #eae8e8;
-        transition: background-color 333ms ease-in-out;
-    }
-
-    .header .item.active .indicator{
-        background-color: #000000;
-        transition: background-color 333ms ease-in-out;
     }
 
     .content-container {
@@ -186,130 +132,78 @@ export default {
         box-sizing: border-box;
         transition: background-color 666ms ease-in-out;
         padding: 0 .31rem;
-        .bg-img {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .image-zone {
             width: 100%;
-            height: auto;
-            max-height: 100%;
+            height: 100%;
             display: block;
             position: absolute;
             bottom: 0;
-            transition: opacity 333ms cubic-bezier(.215,.61,.355,1);
+            left: 0;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: bottom;
         }
         .title-zone {
-            padding-top: 1.11rem;
+            padding-bottom: 2rem;
             overflow:hidden;
-
             h1{
-                font-family: FZLTTHK--GBK1-0;
                 font-size: .50rem;
                 line-height: .68rem;
-                color: #ffffff;
+                color: #000;
                 margin-bottom: .28rem;
                 overflow:hidden;
             }
 
             h2{
-                font-family: FZLTZHK--GBK1-0;
                 font-size: .23rem;
                 line-height: .39rem;
-                color: #000;
+                color: #fff;
                 font-weight: light;
                 vertical-align: top;
                 overflow:hidden;
+                font-weight: lighter;
             }
         }
     }
 
-    @keyframes topOut {
-        0% {
-            opacity: 1;
-            transform: translate3d(0,0,0)
-        }
-        // 50% {
-        //     opacity: 0.5;
-        //     transform: translate3d(0,-0.25rem,0)
-        // }
-        100% {
-            opacity: 0;
-            transform: translate3d(0,-0.5rem,0)
-        }
+    .top .txt {
+        transform: translate3d(0,-24px,0)
     }
 
-    @keyframes topIn {
-        0% {
-            opacity: 0;
-            transform: translate3d(0,-0.5rem,0)
-        }
-        // 50% {
-        //     opacity: 0.5;
-        //     transform: translate3d(0,-0.25rem,0)
-        // }
-        100% {
-            opacity: 1;
-            transform: translate3d(0,0,0)
-        }
+    .bottom .txt {
+        transform: translate3d(0,24px,0)
     }
 
-    @keyframes bottomOut {
-        0% {
-            opacity: 1;
-            transform: translate3d(0,0,0)
-        }
-        // 50% {
-        //     opacity: 0.5;
-        //     transform: translate3d(0,0.25rem,0)
-        // }
-        100% {
-            opacity: 0;
-            transform: translate3d(0,0.5rem,0)
-        }
+    .trans-in .txt {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+        transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
     }
 
-    @keyframes bottomIn {
-        0% {
-            opacity: 0;
-            transform: translate3d(0,0.5rem,0)
-        }
-        // 50% {
-        //     opacity: 0.5;
-        //     transform: translate3d(0,-0.25rem,0)
-        // }
-        100% {
-            opacity: 1;
-            transform: translate3d(0,0,0)
-        }
+    .trans-out .txt {
+        opacity: 0;
+        transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
     }
 
-    .top-out .txt{
-        animation-name: topOut;
-        animation-duration: 333ms;
-        animation-iteration-count: 1;
-        animation-timing-function: cubic-bezier(.55,.055,.675,.19);
-        animation-fill-mode: forwards;
+    .trans-out.top .txt {
+        transform: translate3d(0,24px,0)
     }
 
-    .top-in .txt{
-        animation-name: topIn;
-        animation-duration: 333ms;
-        animation-iteration-count: 1;
-        animation-timing-function: cubic-bezier(.215,.61,.355,1);
-        animation-fill-mode: forwards;
+    .trans-out.bottom .txt {
+        transform: translate3d(0,-24px,0)
     }
 
-    .bottom-out .txt{
-        animation-name: bottomOut;
-        animation-duration: 333ms;
-        animation-iteration-count: 1;
-        animation-timing-function: cubic-bezier(.55,.055,.675,.19);
-        animation-fill-mode: forwards;
+    .pic-in {
+        opacity: 1;
+        transition: opacity 333ms cubic-bezier(.215,.61,.355,1);
     }
 
-    .bottom-in .txt{
-        animation-name: bottomIn;
-        animation-duration: 333ms;
-        animation-iteration-count: 1;
-        animation-timing-function: cubic-bezier(.215,.61,.355,1);
-        animation-fill-mode: forwards;
+    .pic-out {
+        opacity: 0;
+        transition: opacity 333ms cubic-bezier(.55,.055,.675,.19);
     }
 
 </style>
