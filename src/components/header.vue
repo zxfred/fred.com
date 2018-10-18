@@ -7,7 +7,7 @@
             </div>
         </nav>
         <div class="icons" >
-            <div class="icon-holder" v-for="icon in iconList">
+            <div class="icon-holder" v-for="icon in iconList" :key="icon.name">
                 <font-awesome-icon :icon="[icon.type, icon.name]" size="2x" />
             </div>
         </div>

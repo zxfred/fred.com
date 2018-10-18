@@ -81,7 +81,7 @@ export default {
     },
     methods: {
         selectSlide: function (color, url) {
-            this.changeBgColor()
+            this.changeBgColor(color)
             // this.changeBgImg()
             // this.changeTitle()
         },
@@ -133,6 +133,7 @@ export default {
         justify-content: center;
         transition: transform 500ms cubic-bezier(.215,.61,.355,1);
         background-color: rgba(0,0,0,.06);
+        z-index: 1;
         .item {
             height: .9rem;
             color: white;
@@ -163,6 +164,7 @@ export default {
             background-size: contain;
         }
         .info-zone {
+            width: 70%;
             overflow:hidden;
             min-height: 30%;
             position: relative;
