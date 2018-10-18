@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faWeixin, faGithub } from '@fortawesome/free-brands-svg-icons'
 library.add(faEnvelope, faWeixin, faGithub)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-console.log(library)
 
 /* 项目自带 */
 Vue.config.productionTip = false

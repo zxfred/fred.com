@@ -11,13 +11,13 @@
 
                 <!-- sidebar start -->
                 <div class="sidebar">
-                    <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
+                    <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">0{{index + 1}}</div>
                 </div>
                 <!-- sidebar stop -->
 
                 <!-- info start -->
                 <div class="info-zone">
-                    <div class="info-holder" :id="'info-holder' + index" v-for="(slide, index) in slides" :key="index"> 
+                    <div class="info-holder" :class="{ 'trans-in': aIndex == index, 'trans-out': activeIndex != index, 'top': activeIndex > index, 'bottom': activeIndex < index }" v-for="(slide, index) in slides" :key="index">
                         <h1 class="txt">{{slide.title}}</h1>
                         <h2 class="txt">{{slide.desc}}</h2>
                     </div>
@@ -62,11 +62,13 @@ export default {
                     bgColor: '#43d0b4', // 绿色
                     patternUrl: '../assets/nike.png',
             }],
+            activeIndex: 0,
+            aIndex: 0,
             backgroundStyle: {
                 backgroundImage: 'url(' + require('../assets/dog.png') + ')',
             },
             bgStyle: {
-                backgroundColor: '#42d0b4',
+                backgroundColor: '#ebc042',
             },
         }
     },
@@ -80,25 +82,27 @@ export default {
     watch: {
     },
     methods: {
-        selectSlide: function (color, url) {
-            this.changeBgColor(color)
-            // this.changeBgImg()
-            // this.changeTitle()
+        selectSlide: function (color, url, index) {
+            let that = this
+            setTimeout(function () {
+                that.changeBgColor(color)
+                that.activeIndex = index
+                setTimeout(function () {
+                    that.aIndex = index
+                }, 400)
+                // this.changeBgImg()
+                // this.changeTitle()
+            }, 150)
         },
         changeBgImg: function () {
-            let that = this
             this.bgImgStyle.opacity = 0
         },
         changeBgColor: function (color) {
             this.bgStyle.backgroundColor = color
         },
-        changeTitle: function (a) {
-            let that = this
-            if (a === 1) {
-                this.imgClass = 'top trans-out'
-            } else {
-                this.imgClass = 'trans-in'
-            }
+        changeTitle: function () {
+            this.imgClass = 'top trans-out'
+            this.imgClass = 'trans-in'
         },
     },
 }
@@ -172,7 +176,6 @@ export default {
                 position: absolute;
                 top: 0;
                 left: 40px;
-                opacity: 0;
                 h1 {
                     font-size: .50rem;
                     line-height: .68rem;
@@ -188,35 +191,40 @@ export default {
                     overflow:hidden;
                     font-weight: lighter;
                 }
+                .txt {
+                    opacity: 0;
+                }
+                &.trans-in {
+                    .txt {
+                        opacity: 1;
+                        transform: translate3d(0,0,0);
+                        transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
+                    }
+                }
+                &.trans-out {
+                    .txt {
+                        opacity: 0;
+                        transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
+                    }
+                }
             }
         }
     }
 
     .top .txt {
-        transform: translate3d(0,-24px,0)
+        transform: translate3d(0,-0.5rem,0)
     }
 
     .bottom .txt {
-        transform: translate3d(0,24px,0)
-    }
-
-    .trans-in .txt {
-        opacity: 1;
-        transform: translate3d(0,0,0);
-        transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
-    }
-
-    .trans-out .txt {
-        opacity: 0;
-        transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
+        transform: translate3d(0,0.5rem,0)
     }
 
     .trans-out.top .txt {
-        transform: translate3d(0,24px,0)
+        transform: translate3d(0,0.5rem,0)
     }
 
     .trans-out.bottom .txt {
-        transform: translate3d(0,-24px,0)
+        transform: translate3d(0,-0.5rem,0)
     }
 
     .pic-in {
