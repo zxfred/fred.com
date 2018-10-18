@@ -1,27 +1,50 @@
 <template>
-    <div class="header">
-        <div v-for="item in navList" :key="item.name" :class="{active : active == item.name}" class="item" @click="selectNav(item.name)">{{item.name}}
-            <div class="indicator"></div>
+    <header class="header">
+        <div class="logo"></div>
+        <nav class="nav vh-center">
+            <div v-for="item in navList" :key="item.name" :class="{active : active == item.name}" class="item" @click="selectNav(item.name)">{{item.name}}
+                <div class="indicator"></div>
+            </div>
+        </nav>
+        <div class="icons">
+            <span v-for="icon in iconList" class="icon-holder">
+                <font-awesome-icon :icon="[icon.type, icon.name]" size="2x" />
+            </span>
         </div>
-    </div>
+    </header>
 </template>
 
 <script>
 export default {
     name: 'my-header',
+    mounted () {
+    },
     components: {
     },
     data() {
         return {
+
             navList: [{
                 name: '首页',
             },
             {
-                name: '作品',
+                name: '我',
             },
             {
                 name: '博客',
             }],
+
+            iconList: [{
+                name: 'envelope',
+                type: 'fas',
+            },{
+                name: 'weixin',
+                type: 'fab',
+            },{
+                name: 'github',
+                type: 'fab',
+            }],
+
             active: '',
         }
     },
@@ -29,52 +52,71 @@ export default {
         selectNav: function (name) {
             this.active = name
         },
-    }
+    },
 }
 </script>
 
-<style lang="stylus">
-    // header
-    .header {
-        height: 1.04rem;
-        background-color: #ffffff;
-        padding: 0 1.81rem;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        width: 100%;
-    }
+<style lang="stylus" rel="stylesheet/stylus" type="text/stylus">
 
-    .header .item {
-        display: inline-block;
-        width: 1.04rem;
-        height: 100%;
-        font-family: FZLTZHK--GBK1-0;
-        font-size: .22rem;
-        line-height: .22rem;
-        color: #000000;
-        text-align: center;
-        padding-top: .39rem;
-        box-sizing: border-box;
-        position: relative;
-        margin-right: 10px;
-        &:last-child {
-            margin-right: 0px;
+.header {
+    height 76px
+    background-color #ffffff
+    box-sizing border-box
+    width 100%
+    position relative
+    .logo {
+        position absolute
+        left 100px
+        height 76px
+        width 76px
+        background-image url('../assets/donut.png')
+        background-size 100% 100%
+    }
+    .nav {
+        height 34px
+        .item {
+            display inline-block
+            width 76px
+            height 100%
+            font-size 15px
+            line-height 25px
+            color #000000
+            text-align center
+            box-sizing border-box
+            position relative
+            margin 0 10px
+            .indicator{
+                position absolute
+                height 3px
+                left 15px
+                right 15px
+                bottom 0
+                background-color #eae8e8
+                transition background-color 333ms ease-in-out
+            }
+        }
+        .item.active .indicator{
+            background-color #000000
+            transition background-color 333ms ease-in-out
         }
     }
-
-    .header .item .indicator{
-        height: .04rem;
-        width: 100%;
-        border-radius: .02rem;
-        position: absolute;
-        bottom: .29rem;
-        background-color: #eae8e8;
-        transition: background-color 333ms ease-in-out;
+    .icons {
+        position absolute
+        top 0
+        bottom 0
+        right 40px
+        .icon-holder {
+            margin 0 10px
+            svg {
+                color #000
+                transition color 333ms cubic-bezier(.215, .61, .355, 1)
+            }
+            svg:hover {
+                color #a0a0a0
+                transition color 333ms cubic-bezier(.215, .61, .355, 1)
+            }
+        }
     }
+}
 
-    .header .item.active .indicator{
-        background-color: #000000;
-        transition: background-color 333ms ease-in-out;
-    }
 </style>

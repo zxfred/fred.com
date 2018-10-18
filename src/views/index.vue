@@ -40,25 +40,25 @@ export default {
         return {
             slides: [{
                     title: '这是第一个大标题',
-                    desc: 'This is the desc 1. This is the desc 1. This is the desc 1.',
+                    desc: 'This is the desc 1. This is the desc 1.',
                     bgColor: '#ebc042', // 黄色
                     patternUrl: '../assets/bro.png',
                 },
                 {
                     title: '这是第二个大标题',
-                    desc: 'This is the desc 2. This is the desc 2. This is the desc 2.',
+                    desc: 'This is the desc 2. This is the desc 2.',
                     bgColor: '#41ace7', // 蓝色
                     patternUrl: '../assets/dear.png',
                 },
                 {
                     title: '这是第三个大标题',
-                    desc: 'This is the desc 3. This is the desc 3. This is the desc 3.',
+                    desc: 'This is the desc 3. This is the desc 3.',
                     bgColor: '#f96554', // 红色
                     patternUrl: '../assets/dog.png',
                 },
                 {
                     title: '这是第四个大标题',
-                    desc: 'This is the desc 4. This is the desc 4. This is the desc 4.',
+                    desc: 'This is the desc 4. This is the desc 4.',
                     bgColor: '#43d0b4', // 绿色
                     patternUrl: '../assets/nike.png',
             }],
@@ -94,7 +94,7 @@ export default {
         },
         changeTitle: function (a) {
             let that = this
-            if (a == 1) {
+            if (a === 1) {
                 this.imgClass = 'top trans-out'
             } else {
                 this.imgClass = 'trans-in'
@@ -158,7 +158,6 @@ export default {
             position: absolute;
             bottom: 0;
             left: 0;
-            background-size: 100% auto;
             background-repeat: no-repeat;
             background-position: right bottom;
             background-size: contain;
@@ -183,7 +182,6 @@ export default {
                     font-size: .23rem;
                     line-height: .39rem;
                     color: #000;
-                    font-weight: light;
                     vertical-align: top;
                     overflow:hidden;
                     font-weight: lighter;
