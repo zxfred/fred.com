@@ -1,31 +1,31 @@
 <template>
 	<div class="main-container">
+        <div class="main-inner">
+            <!-- nav start -->
+            <my-header></my-header>
+            <!-- nav stop -->
 
-        <!-- nav start -->
-        <my-header></my-header>
-        <!-- nav stop -->
+            <div class="content-container" v-bind:style="bgStyle">
 
-        <div class="content-container" v-bind:style="bgStyle">
+                <div class="image-zone" :style="backgroundStyle"></div>
 
-            <div class="image-zone" :style="backgroundStyle"></div>
-
-            <!-- sidebar start -->
-            <div class="sidebar">
-                <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
-            </div>
-            <!-- sidebar stop -->
-
-            <!-- info start -->
-            <div class="info-zone">
-                <div class="info-holder" v-for="(slide, index) in slides" :key="index"> 
-                    <h1 class="txt">{{slide.title}}</h1>
-                    <h2 class="txt">{{slide.desc}}</h2>
+                <!-- sidebar start -->
+                <div class="sidebar">
+                    <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl)">0{{index + 1}}</div>
                 </div>
-            </div>
-            <!-- info stop -->
-            
-        </div>
+                <!-- sidebar stop -->
 
+                <!-- info start -->
+                <div class="info-zone">
+                    <div class="info-holder" :id="'info-holder' + index" v-for="(slide, index) in slides" :key="index"> 
+                        <h1 class="txt">{{slide.title}}</h1>
+                        <h2 class="txt">{{slide.desc}}</h2>
+                    </div>
+                </div>
+                <!-- info stop -->
+                
+            </div>
+        </div>
 	</div>
 </template>
 <script>
@@ -106,24 +106,37 @@ export default {
 
 <style lang="stylus">
     .main-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
         height: 100%;
-        position: relative;
+    }
+
+    .main-inner {
+        left: 40px;
+        right: 40px;
+        top: 0;
+        bottom: 0;
         display: flex;
         flex-direction: column;
+        position: absolute;
     }
 
     .sidebar {
         position: absolute;
         right: 0;
         height: 100%;
-        width: 1.08rem;
+        width: .9rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        transition: transform 500ms cubic-bezier(.215,.61,.355,1);
+        background-color: rgba(0,0,0,.06);
         .item {
-            height: .6rem;
+            height: .9rem;
             color: white;
-            line-height: .6rem;
+            line-height: .9rem;
             text-align: center;
             overflow: hidden;
             transition: color 333ms cubic-bezier(.215,.61,.355,1);
@@ -135,7 +148,6 @@ export default {
         position: relative;
         box-sizing: border-box;
         transition: background-color 666ms ease-in-out;
-        padding: 0 .31rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -148,16 +160,22 @@ export default {
             left: 0;
             background-size: 100% auto;
             background-repeat: no-repeat;
-            background-position: bottom;
+            background-position: right bottom;
+            background-size: contain;
         }
         .info-zone {
             overflow:hidden;
             min-height: 30%;
+            position: relative;
             .info-holder {
+                position: absolute;
+                top: 0;
+                left: 40px;
+                opacity: 0;
                 h1 {
                     font-size: .50rem;
                     line-height: .68rem;
-                    color: #ddd;
+                    color: #fff;
                     margin-bottom: .28rem;
                     overflow:hidden;
                 }
