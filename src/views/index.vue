@@ -17,7 +17,7 @@
 
                 <!-- info start -->
                 <div class="info-zone">
-                    <div class="info-holder" :class="{ 'trans-in': aIndex == index, 'trans-out': activeIndex != index, 'top': activeIndex > index, 'bottom': activeIndex < index }" v-for="(slide, index) in slides" :key="index">
+                    <div class="info-holder" :class="{ 'trans-in': aIndex == index }" v-for="(slide, index) in slides" :key="index">
                         <h1 class="txt">{{slide.title}}</h1>
                         <h2 class="txt">{{slide.desc}}</h2>
                     </div>
@@ -43,24 +43,28 @@ export default {
                     desc: 'This is the desc 1. This is the desc 1.',
                     bgColor: '#ebc042', // 黄色
                     patternUrl: '../assets/bro.png',
+                    position: ''
                 },
                 {
                     title: '这是第二个大标题',
                     desc: 'This is the desc 2. This is the desc 2.',
                     bgColor: '#41ace7', // 蓝色
                     patternUrl: '../assets/dear.png',
+                    position: ''
                 },
                 {
                     title: '这是第三个大标题',
                     desc: 'This is the desc 3. This is the desc 3.',
                     bgColor: '#f96554', // 红色
                     patternUrl: '../assets/dog.png',
+                    position: ''
                 },
                 {
                     title: '这是第四个大标题',
                     desc: 'This is the desc 4. This is the desc 4.',
                     bgColor: '#43d0b4', // 绿色
                     patternUrl: '../assets/nike.png',
+                    position: ''
             }],
             activeIndex: 0,
             aIndex: 0,
