@@ -6,10 +6,10 @@
                 <div class="indicator"></div>
             </div>
         </nav>
-        <div class="icons">
-            <span v-for="icon in iconList" class="icon-holder">
+        <div class="icons" >
+            <div class="icon-holder" v-for="icon in iconList">
                 <font-awesome-icon :icon="[icon.type, icon.name]" size="2x" />
-            </span>
+            </div>
         </div>
     </header>
 </template>
@@ -106,7 +106,11 @@ export default {
         bottom 0
         right 40px
         .icon-holder {
+            display inline-flex
+            height 100%
             margin 0 10px
+            flex-direction column
+            justify-content center
             svg {
                 color #000
                 transition color 333ms cubic-bezier(.215, .61, .355, 1)
