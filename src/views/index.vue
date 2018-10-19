@@ -17,7 +17,7 @@
 
                 <!-- info start -->
                 <div class="info-zone">
-                    <div class="info-holder" :class="{ 'trans-in': aIndex == index }" v-for="(slide, index) in slides" :key="index">
+                    <div class="info-holder" :class="slide.class" v-for="(slide, index) in slides" :key="index">
                         <h1 class="txt">{{slide.title}}</h1>
                         <h2 class="txt">{{slide.desc}}</h2>
                     </div>
@@ -43,31 +43,29 @@ export default {
                     desc: 'This is the desc 1. This is the desc 1.',
                     bgColor: '#ebc042', // 黄色
                     patternUrl: '../assets/bro.png',
-                    position: ''
+                    class: ''
                 },
                 {
                     title: '这是第二个大标题',
                     desc: 'This is the desc 2. This is the desc 2.',
                     bgColor: '#41ace7', // 蓝色
                     patternUrl: '../assets/dear.png',
-                    position: ''
+                    class: ''
                 },
                 {
                     title: '这是第三个大标题',
                     desc: 'This is the desc 3. This is the desc 3.',
                     bgColor: '#f96554', // 红色
                     patternUrl: '../assets/dog.png',
-                    position: ''
+                    class: ''
                 },
                 {
                     title: '这是第四个大标题',
                     desc: 'This is the desc 4. This is the desc 4.',
                     bgColor: '#43d0b4', // 绿色
                     patternUrl: '../assets/nike.png',
-                    position: ''
+                    class: ''
             }],
-            activeIndex: 0,
-            aIndex: 0,
             backgroundStyle: {
                 backgroundImage: 'url(' + require('../assets/dog.png') + ')',
             },
@@ -90,7 +88,9 @@ export default {
             let that = this
             setTimeout(function () {
                 that.changeBgColor(color)
-                that.activeIndex = index
+
+                
+
                 setTimeout(function () {
                     that.aIndex = index
                 }, 400)
