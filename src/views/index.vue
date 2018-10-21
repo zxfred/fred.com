@@ -1,28 +1,30 @@
 <template>
 	<div class="main-container">
         <div class="main-inner">
-            <!-- nav start -->
+            <!--nav start-->
             <my-header></my-header>
-            <!-- nav stop -->
+            <!--nav stop-->
 
             <div class="content-container" v-bind:style="bgStyle">
 
                 <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="{'pic-in': index === activeIndex, 'pic-out': index !== activeIndex}"></div>
 
-                <!-- sidebar start -->
-                <div class="sidebar">
-                    <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">0{{index + 1}}</div>
+                <!--sidebar zone start-->
+                <div class="hover-zone">
+                    <div class="sidebar">
+                        <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">0{{index + 1}}</div>
+                    </div>
                 </div>
-                <!-- sidebar stop -->
+                <!--sidebar zone stop-->
 
-                <!-- info start -->
+                <!--info start-->
                 <div class="info-zone">
                     <div class="info-holder" :class="slide.class" v-for="(slide, index) in slides" :key="index">
                         <h1 class="txt">{{slide.title}}</h1>
                         <h2 class="txt">{{slide.desc}}</h2>
                     </div>
                 </div>
-                <!-- info stop -->
+                <!--info stop-->
                 
             </div>
         </div>
@@ -115,110 +117,116 @@ export default {
 
 <style lang="stylus">
     .main-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
     }
 
     .main-inner {
-        left: 40px;
-        right: 40px;
-        top: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: column;
-        position: absolute;
+        left 40px
+        right 40px
+        top 0
+        bottom 0
+        display flex
+        flex-direction column
+        position absolute
+    }
+
+    .hover-zone {
+        width 320px
+        height 100%
+        position absolute
+        right 0
     }
 
     .sidebar {
-        position: absolute;
-        right: 0;
-        height: 100%;
-        width: .9rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: transform 500ms cubic-bezier(.215,.61,.355,1);
-        background-color: rgba(0,0,0,.06);
-        z-index: 1;
+        position absolute
+        right 0
+        height 100%
+        display flex
+        flex-direction column
+        justify-content center
+        transition transform 500ms cubic-bezier(.215,.61,.355,1)
+        background-color rgba(0,0,0,.06)
+        z-index 1
         .item {
-            height: .9rem;
-            color: white;
-            line-height: .9rem;
-            text-align: center;
-            overflow: hidden;
-            transition: color 333ms cubic-bezier(.215,.61,.355,1);
+            height .9rem
+            color white
+            line-height .9rem
+            text-align center
+            overflow hidden
+            transition color 333ms cubic-bezier(.215,.61,.355,1)
         }
     }
 
     .content-container {
-        flex: 1;
-        position: relative;
-        box-sizing: border-box;
-        transition: background-color 666ms ease-in-out;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        flex 1
+        position relative
+        box-sizing border-box
+        transition background-color 666ms ease-in-out
+        display flex
+        flex-direction column
+        justify-content center
         .image-zone {
-            width: 100%;
-            height: 100%;
-            display: block;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-repeat: no-repeat;
-            background-position: right bottom;
-            background-size: contain;
+            width 100%
+            height 100%
+            display block
+            position absolute
+            bottom 0
+            left 0
+            background-repeat no-repeat
+            background-position right bottom
+            background-size contain
         }
         .info-zone {
-            width: 70%;
-            overflow:hidden;
-            min-height: 30%;
-            position: relative;
+            width 70%
+            overflow hidden
+            min-height 30%
+            position relative
             .info-holder {
-                position: absolute;
-                top: 0;
-                left: 40px;
+                position absolute
+                top 0
+                left 40px
                 h1 {
-                    font-size: .50rem;
-                    line-height: .68rem;
-                    color: #fff;
-                    margin-bottom: .28rem;
-                    overflow:hidden;
+                    font-size .50rem
+                    line-height .68rem
+                    color #fff
+                    margin-bottom .28rem
+                    overflow hidden
                 }
                 h2 {
-                    font-size: .23rem;
-                    line-height: .39rem;
-                    color: #000;
-                    vertical-align: top;
-                    overflow:hidden;
-                    font-weight: lighter;
+                    font-size .23rem
+                    line-height .39rem
+                    color #000
+                    vertical-align top
+                    overflow hidden
+                    font-weight lighter
                 }
                 .txt {
-                    opacity: 0;
+                    opacity 0
                 }
             }
             .info-holder.trans-in .txt{
-                opacity: 1;
-                transition: opacity 333ms cubic-bezier(.215,.61,.355,1)
+                opacity 1
+                transition opacity 333ms cubic-bezier(.215,.61,.355,1)
             }
             .info-holder.trans-out .txt{
-                opacity: 0;
-                transition: opacity 333ms cubic-bezier(.55,.055,.675,.19)
+                opacity 0
+                transition opacity 333ms cubic-bezier(.55,.055,.675,.19)
             }
         }
     }
 
     .pic-in {
-        opacity: 1;
-        transition: opacity 333ms cubic-bezier(.215,.61,.355,1);
+        opacity 1
+        transition opacity 333ms cubic-bezier(.215,.61,.355,1)
     }
 
     .pic-out {
-        opacity: 0;
-        transition: opacity 333ms cubic-bezier(.55,.055,.675,.19);
+        opacity 0
+        transition opacity 333ms cubic-bezier(.55,.055,.675,.19)
     }
 
 </style>
