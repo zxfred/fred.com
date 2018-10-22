@@ -89,10 +89,9 @@ export default {
             setTimeout(function () {
                 that.changeBgColor(color)
 
-                
-
+            
                 setTimeout(function () {
-                    that.aIndex = index
+                    
                 }, 400)
                 // this.changeBgImg()
                 // this.changeTitle()
