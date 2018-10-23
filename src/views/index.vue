@@ -7,7 +7,7 @@
 
             <div class="content-container" v-bind:style="bgStyle">
 
-                <div class="image-zone" :style="backgroundStyle"></div>
+                <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="bgClass"></div>
 
                 <!-- sidebar start -->
                 <div class="sidebar">
@@ -42,34 +42,30 @@ export default {
                     title: '这是第一个大标题',
                     desc: 'This is the desc 1. This is the desc 1.',
                     bgColor: '#ebc042', // 黄色
-                    patternUrl: '../assets/bro.png',
+                    patternUrl: require('../assets/bro.png'),
                     class: ''
                 },
                 {
                     title: '这是第二个大标题',
                     desc: 'This is the desc 2. This is the desc 2.',
                     bgColor: '#41ace7', // 蓝色
-                    patternUrl: '../assets/dear.png',
+                    patternUrl: require('../assets/dear.png'),
                     class: ''
                 },
                 {
                     title: '这是第三个大标题',
                     desc: 'This is the desc 3. This is the desc 3.',
                     bgColor: '#f96554', // 红色
-                    patternUrl: '../assets/dog.png',
+                    patternUrl: require('../assets/dog.png'),
                     class: ''
                 },
                 {
                     title: '这是第四个大标题',
                     desc: 'This is the desc 4. This is the desc 4.',
                     bgColor: '#43d0b4', // 绿色
-                    patternUrl: '../assets/nike.png',
+                    patternUrl: require('../assets/nike.png'),
                     class: ''
             }],
-            backgroundStyle: {
-                backgroundImage: 'url(' + require('../assets/dog.png') + ')',
-                opacity: 1,
-            },
             bgStyle: {
                 backgroundColor: '#ebc042',
             },
@@ -102,12 +98,10 @@ export default {
         },
         changeBgImg: function () {
             let that = this
-            this.backgroundStyle.opacity = 0
+            that.bgClass = 'pic-out'
             setTimeout(function () {
                 that.backgroundStyle.backgroundImage = 'url(' + that.slides[that.activeIndex].patternUrl + ')'
-                that.backgroundStyle.opacity = 1
-                // this.changeBgImg()
-                // this.changeTitle()
+                that.bgClass = 'pic-in'
             }, 400)
         },
         changeBgColor: function (color) {
