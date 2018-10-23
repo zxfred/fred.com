@@ -34,37 +34,37 @@ import Header from '../components/header.vue'
 export default {
     name: 'indexPage',
     components: {
-        'my-header': Header
+        'my-header': Header,
     },
     data: function () {
         return {
             slides: [{
-                    title: '这是第一个大标题',
-                    desc: 'This is the desc 1. This is the desc 1.',
-                    bgColor: '#ebc042', // 黄色
-                    patternUrl: require('../assets/bro.png'),
-                    class: ''
-                },
-                {
-                    title: '这是第二个大标题',
-                    desc: 'This is the desc 2. This is the desc 2.',
-                    bgColor: '#41ace7', // 蓝色
-                    patternUrl: require('../assets/dear.png'),
-                    class: ''
-                },
-                {
-                    title: '这是第三个大标题',
-                    desc: 'This is the desc 3. This is the desc 3.',
-                    bgColor: '#f96554', // 红色
-                    patternUrl: require('../assets/dog.png'),
-                    class: ''
-                },
-                {
-                    title: '这是第四个大标题',
-                    desc: 'This is the desc 4. This is the desc 4.',
-                    bgColor: '#43d0b4', // 绿色
-                    patternUrl: require('../assets/nike.png'),
-                    class: ''
+                title: '这是第一个大标题',
+                desc: 'This is the desc 1. This is the desc 1.',
+                bgColor: '#ebc042', // 黄色
+                patternUrl: require('../assets/bro.png'),
+                class: '',
+            },
+            {
+                title: '这是第二个大标题',
+                desc: 'This is the desc 2. This is the desc 2.',
+                bgColor: '#41ace7', // 蓝色
+                patternUrl: require('../assets/dear.png'),
+                class: '',
+            },
+            {
+                title: '这是第三个大标题',
+                desc: 'This is the desc 3. This is the desc 3.',
+                bgColor: '#f96554', // 红色
+                patternUrl: require('../assets/dog.png'),
+                class: '',
+            },
+            {
+                title: '这是第四个大标题',
+                desc: 'This is the desc 4. This is the desc 4.',
+                bgColor: '#43d0b4', // 绿色
+                patternUrl: require('../assets/nike.png'),
+                class: '',
             }],
             bgStyle: {
                 backgroundColor: '#ebc042',
