@@ -7,7 +7,7 @@
 
             <div class="content-container" v-bind:style="bgStyle">
 
-                <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="bgClass"></div>
+                <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="{'pic-in': index == activeIndex, 'pic-out': index != activeIndex}"></div>
 
                 <!-- sidebar start -->
                 <div class="sidebar">
@@ -75,7 +75,7 @@ export default {
     beforeCreate () {
     },
     mounted () {
-        
+        this.activeIndex = 0
     },
     computed: {
     },
@@ -94,14 +94,13 @@ export default {
                 // this.changeBgImg()
                 // this.changeTitle()
             }, 150)
-            that.changeBgImg()
+            that.changeBgImg(index)
         },
-        changeBgImg: function () {
+        changeBgImg: function (index) {
             let that = this
-            that.bgClass = 'pic-out'
+            that.activeIndex = undefined
             setTimeout(function () {
-                that.backgroundStyle.backgroundImage = 'url(' + that.slides[that.activeIndex].patternUrl + ')'
-                that.bgClass = 'pic-in'
+                that.activeIndex = index
             }, 400)
         },
         changeBgColor: function (color) {
