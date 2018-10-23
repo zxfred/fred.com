@@ -68,10 +68,12 @@ export default {
             }],
             backgroundStyle: {
                 backgroundImage: 'url(' + require('../assets/dog.png') + ')',
+                opacity: 1,
             },
             bgStyle: {
                 backgroundColor: '#ebc042',
             },
+            activeIndex: 0,
         }
     },
     beforeCreate () {
@@ -86,19 +88,27 @@ export default {
     methods: {
         selectSlide: function (color, url, index) {
             let that = this
+            this.activeIndex = index
             setTimeout(function () {
                 that.changeBgColor(color)
 
-            
                 setTimeout(function () {
                     
                 }, 400)
                 // this.changeBgImg()
                 // this.changeTitle()
             }, 150)
+            that.changeBgImg()
         },
         changeBgImg: function () {
-            this.bgImgStyle.opacity = 0
+            let that = this
+            this.backgroundStyle.opacity = 0
+            setTimeout(function () {
+                that.backgroundStyle.backgroundImage = 'url(' + that.slides[that.activeIndex].patternUrl + ')'
+                that.backgroundStyle.opacity = 1
+                // this.changeBgImg()
+                // this.changeTitle()
+            }, 400)
         },
         changeBgColor: function (color) {
             this.bgStyle.backgroundColor = color
