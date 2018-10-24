@@ -145,6 +145,7 @@ export default {
         position absolute
         right 0
         height 100%
+        width 40px
         display flex
         flex-direction column
         justify-content center
