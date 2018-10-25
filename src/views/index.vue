@@ -100,15 +100,13 @@ export default {
             this.bgStyle.backgroundColor = color
         },
         changeTitle: function (formerIndex, index) {
-            this.slides.forEach((v, i) => {
-                let pos
-                if (i < index) {
-                    pos = 'bottom'
-                } else {
-                    pos = 'top'
-                }
-                v.class = pos + ' trans-out'
-            })
+            let pos
+            if (formerIndex < index) {
+                pos = 'bottom'
+            } else if (formerIndex > index) {
+                pos = 'top'
+            }
+            this.slides[formerIndex].class = pos + ' trans-out'
             setTimeout(() => {
                 this.slides[index].class = 'trans-in'
             }, 333)
