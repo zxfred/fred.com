@@ -7,7 +7,7 @@
 
             <div class="content-container" v-bind:style="bgStyle">
 
-                <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="{'pic-in': index == activeIndex, 'pic-out': index != activeIndex}"></div>
+                <div v-for="(slide, index) in slides" :key="index" class="image-zone" :style="{backgroundImage: 'url(' + slide.patternUrl + ')'}" :class="{'pic-in': index === activeIndex, 'pic-out': index !== activeIndex}"></div>
 
                 <!-- sidebar start -->
                 <div class="sidebar">
@@ -69,7 +69,7 @@ export default {
             bgStyle: {
                 backgroundColor: '#ebc042',
             },
-            activeIndex: 0,
+            activeIndex: null,
         }
     },
     beforeCreate () {
@@ -82,11 +82,12 @@ export default {
     watch: {
     },
     methods: {
-        selectSlide: function (color, url, index) {
-            if (this.activeIndex != index) {
-                this.activeIndex = index
+        selectSlide: function(color, url, index) {
+            if (this.activeIndex !== index) {
+                let formerIndex = this.activeIndex
                 this.changeBgColor(color)                
                 this.changeBgImg(index)
+                this.changeTitle(formerIndex, index)
             }
         },
         changeBgImg: function (index) {
@@ -98,9 +99,19 @@ export default {
         changeBgColor: function (color) {
             this.bgStyle.backgroundColor = color
         },
-        changeTitle: function () {
-            this.imgClass = 'top trans-out'
-            this.imgClass = 'trans-in'
+        changeTitle: function (formerIndex, index) {
+            this.slides.forEach((v, i) => {
+                let pos
+                if (i < index) {
+                    pos = 'bottom'
+                } else {
+                    pos = 'top'
+                }
+                v.class = pos + ' trans-out'
+            })
+            setTimeout(() => {
+                this.slides[index].class = 'trans-in'
+            }, 333)
         },
     },
 }
@@ -192,37 +203,33 @@ export default {
                 .txt {
                     opacity: 0;
                 }
-                &.trans-in {
-                    .txt {
-                        opacity: 1;
-                        transform: translate3d(0,0,0);
-                        transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
-                    }
-                }
-                &.trans-out {
-                    .txt {
-                        opacity: 0;
-                        transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
-                    }
-                }
+            }
+            .info-holder.top .txt {
+                transform: translate3d(0,-0.5rem,0)
+            }
+
+            .info-holder.bottom .txt {
+                transform: translate3d(0,0.5rem,0)
+            }
+
+            .info-holder.trans-in .txt{
+                opacity: 1;
+                transform: translate3d(0,0,0);
+                transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
+            }
+            .info-holder.trans-out .txt{
+                opacity: 0;
+                transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
+            }
+
+            .info-holder.trans-out.top .txt {
+                transform: translate3d(0,0.5rem,0)
+            }
+
+            .info-holder.trans-out.bottom .txt {
+                transform: translate3d(0,-0.5rem,0)
             }
         }
-    }
-
-    .top .txt {
-        transform: translate3d(0,-0.5rem,0)
-    }
-
-    .bottom .txt {
-        transform: translate3d(0,0.5rem,0)
-    }
-
-    .trans-out.top .txt {
-        transform: translate3d(0,0.5rem,0)
-    }
-
-    .trans-out.bottom .txt {
-        transform: translate3d(0,-0.5rem,0)
     }
 
     .pic-in {
