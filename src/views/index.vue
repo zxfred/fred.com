@@ -83,25 +83,17 @@ export default {
     },
     methods: {
         selectSlide: function (color, url, index) {
-            let that = this
-            this.activeIndex = index
-            setTimeout(function () {
-                that.changeBgColor(color)
-
-                setTimeout(function () {
-                    
-                }, 400)
-                // this.changeBgImg()
-                // this.changeTitle()
-            }, 150)
-            that.changeBgImg(index)
+            if (this.activeIndex != index) {
+                this.activeIndex = index
+                this.changeBgColor(color)                
+                this.changeBgImg(index)
+            }
         },
         changeBgImg: function (index) {
-            let that = this
-            that.activeIndex = undefined
-            setTimeout(function () {
-                that.activeIndex = index
-            }, 400)
+            this.activeIndex = undefined
+            setTimeout(() => {
+                this.activeIndex = index
+            }, 333)
         },
         changeBgColor: function (color) {
             this.bgStyle.backgroundColor = color
