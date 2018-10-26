@@ -75,13 +75,17 @@ export default {
     beforeCreate () {
     },
     mounted () {
-        this.activeIndex = 0
+        this.init()
     },
     computed: {
     },
     watch: {
     },
     methods: {
+        init: function () {
+            this.activeIndex = 0
+            this.slides[0].class = 'trans-in'
+        },
         selectSlide: function(color, url, index) {
             if (this.activeIndex !== index) {
                 let formerIndex = this.activeIndex
@@ -100,13 +104,7 @@ export default {
             this.bgStyle.backgroundColor = color
         },
         changeTitle: function (formerIndex, index) {
-            let pos
-            if (formerIndex < index) {
-                pos = 'bottom'
-            } else if (formerIndex > index) {
-                pos = 'top'
-            }
-            this.slides[formerIndex].class = pos + ' trans-out'
+            this.slides[formerIndex].class = 'trans-out'
             setTimeout(() => {
                 this.slides[index].class = 'trans-in'
             }, 333)
@@ -202,30 +200,13 @@ export default {
                     opacity: 0;
                 }
             }
-            .info-holder.top .txt {
-                transform: translate3d(0,-0.5rem,0)
-            }
-
-            .info-holder.bottom .txt {
-                transform: translate3d(0,0.5rem,0)
-            }
-
             .info-holder.trans-in .txt{
                 opacity: 1;
-                transform: translate3d(0,0,0);
-                transition: transform 333ms cubic-bezier(.215,.61,.355,1),opacity 333ms cubic-bezier(.215,.61,.355,1)
+                transition: opacity 333ms cubic-bezier(.215,.61,.355,1)
             }
             .info-holder.trans-out .txt{
                 opacity: 0;
-                transition: transform 333ms cubic-bezier(.55,.055,.675,.19),opacity 333ms cubic-bezier(.55,.055,.675,.19)
-            }
-
-            .info-holder.trans-out.top .txt {
-                transform: translate3d(0,0.5rem,0)
-            }
-
-            .info-holder.trans-out.bottom .txt {
-                transform: translate3d(0,-0.5rem,0)
+                transition: opacity 333ms cubic-bezier(.55,.055,.675,.19)
             }
         }
     }
