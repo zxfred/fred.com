@@ -12,8 +12,11 @@
                 <!--sidebar zone start-->
                 <div class="hover-zone">
                     <div class="sidebar">
-                        <div class="list">
-                            <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">0{{index + 1}}</div>
+                        <div class="list v-center">
+                            <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">
+                                <span class="indicator"></span>
+                                <span class="txt">0{{index + 1}}</span>
+                            </div>
                         </div>
                         <div class="detail">
                             <div class="item"></div>
@@ -48,7 +51,7 @@ export default {
             slides: [{
                 title: '这是第一个大标题',
                 desc: 'This is the desc 1. This is the desc 1.',
-                listDesc: '',
+                listDesc: '我是第1个item',
                 bgColor: '#ebc042', // 黄色
                 patternUrl: require('../assets/bro.png'),
                 class: '',
@@ -56,7 +59,7 @@ export default {
             {
                 title: '这是第二个大标题',
                 desc: 'This is the desc 2. This is the desc 2.',
-                listDesc: '',
+                listDesc: '我是第2个item',
                 bgColor: '#41ace7', // 蓝色
                 patternUrl: require('../assets/dear.png'),
                 class: '',
@@ -64,7 +67,7 @@ export default {
             {
                 title: '这是第三个大标题',
                 desc: 'This is the desc 3. This is the desc 3.',
-                listDesc: '',
+                listDesc: '我是第3个item',
                 bgColor: '#f96554', // 红色
                 patternUrl: require('../assets/dog.png'),
                 class: '',
@@ -72,7 +75,7 @@ export default {
             {
                 title: '这是第四个大标题',
                 desc: 'This is the desc 4. This is the desc 4.',
-                listDesc: '',
+                listDesc: '我是第4个item',
                 bgColor: '#43d0b4', // 绿色
                 patternUrl: require('../assets/nike.png'),
                 class: '',
@@ -162,21 +165,33 @@ export default {
         width 320px
         transition transform 500ms cubic-bezier(.215,.61,.355,1)
         transform translate3d(-40px,0,0)
-        z-index 1
+        background-color rgba(0,0,0,.06)
         .list {
-            width 40px
-            display inline-flex
-            flex-direction column
-            justify-content center
-            background-color rgba(0,0,0,.06)
-            height 100%
+            width 100%
             .item {
                 height 40px
-                color white
                 line-height 40px
                 text-align center
                 overflow hidden
                 transition color 333ms cubic-bezier(.215,.61,.355,1)
+                position relative
+                .txt {
+                    display block
+                    color white
+                    float left
+                    width 40px
+                }
+                .indicator {
+                    display none
+                    width 100%
+                    height 100%
+                    line-height 40px
+                    background-color black
+                    transition transform 500ms cubic-bezier(.215,.61,.355,1)
+                }
+            }
+            .item:hover .indicator {
+                transform translateX(-100%)
             }
         }
         .detail {
@@ -186,7 +201,7 @@ export default {
              width 280px
              right 0
              position absolute
-         }
+        }
     }
 
     .content-container {
