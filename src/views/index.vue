@@ -15,7 +15,7 @@
                         <div class="list v-center">
                             <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">
                                 <span class="indicator"></span>
-                                <span class="txt">0{{index + 1}}</span>
+                                <span class="index">0{{index + 1}}</span>
                             </div>
                         </div>
                         <div class="detail">
@@ -171,36 +171,38 @@ export default {
             .item {
                 height 40px
                 line-height 40px
-                text-align center
                 overflow hidden
                 transition color 333ms cubic-bezier(.215,.61,.355,1)
                 position relative
-                .txt {
+                .index {
+                    float left
                     display block
                     color white
-                    float left
                     width 40px
+                    text-align center
+                    height 100%
                 }
                 .indicator {
-                    display none
-                    width 100%
+                    display block
+                    position absolute
+                    top 0
+                    left 0
+                    width 280px
                     height 100%
-                    line-height 40px
                     background-color black
+                    transform translate3d(40px,0,0)
                     transition transform 500ms cubic-bezier(.215,.61,.355,1)
                 }
             }
             .item:hover .indicator {
-                transform translateX(-100%)
+                transform translate3d(0,0,0)
             }
         }
         .detail {
-             display inline-flex
+             float right
              background-color black
              height 100%
              width 280px
-             right 0
-             position absolute
         }
     }
 
