@@ -169,16 +169,18 @@ export default {
         .list {
             width 100%
             .item {
+                display block
                 height 40px
                 line-height 40px
                 overflow hidden
-                transition color 333ms cubic-bezier(.215,.61,.355,1)
+                // transition color 333ms cubic-bezier(.215,.61,.355,1)
                 position relative
+                color #fff
                 .index {
                     float left
                     display block
-                    color white
                     width 40px
+                    position relative // 为什么加了这个, 层叠会正常呢
                     text-align center
                     height 100%
                 }
