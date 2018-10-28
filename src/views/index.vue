@@ -13,9 +13,10 @@
                 <div class="hover-zone">
                     <div class="sidebar">
                         <div class="list v-center">
-                            <div v-for="(slide, index) in slides" :key="index" class="item" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">
+                            <div v-for="(slide, index) in slides" :key="index" class="item" :class="{selected: index === activeIndex}" @click="selectSlide(slide.bgColor, slide.patternUrl, index)">
                                 <span class="indicator"></span>
-                                <span class="index">0{{index + 1}}</span>
+                                <span class="item-index">0{{index + 1}}</span>
+                                <span class="item-name">{{slide.navTitle}}</span>
                             </div>
                         </div>
                         <div class="detail">
@@ -51,7 +52,7 @@ export default {
             slides: [{
                 title: '这是第一个大标题',
                 desc: 'This is the desc 1. This is the desc 1.',
-                listDesc: '我是第1个item',
+                navTitle: '我是第1个item',
                 bgColor: '#ebc042', // 黄色
                 patternUrl: require('../assets/bro.png'),
                 class: '',
@@ -59,7 +60,7 @@ export default {
             {
                 title: '这是第二个大标题',
                 desc: 'This is the desc 2. This is the desc 2.',
-                listDesc: '我是第2个item',
+                navTitle: '我是第2个item',
                 bgColor: '#41ace7', // 蓝色
                 patternUrl: require('../assets/dear.png'),
                 class: '',
@@ -67,7 +68,7 @@ export default {
             {
                 title: '这是第三个大标题',
                 desc: 'This is the desc 3. This is the desc 3.',
-                listDesc: '我是第3个item',
+                navTitle: '我是第3个item',
                 bgColor: '#f96554', // 红色
                 patternUrl: require('../assets/dog.png'),
                 class: '',
@@ -75,7 +76,7 @@ export default {
             {
                 title: '这是第四个大标题',
                 desc: 'This is the desc 4. This is the desc 4.',
-                listDesc: '我是第4个item',
+                navTitle: '我是第4个item',
                 bgColor: '#43d0b4', // 绿色
                 patternUrl: require('../assets/nike.png'),
                 class: '',
@@ -176,13 +177,18 @@ export default {
                 // transition color 333ms cubic-bezier(.215,.61,.355,1)
                 position relative
                 color #fff
-                .index {
+                .item-index {
                     float left
                     display block
                     width 40px
                     position relative // 为什么加了这个, 层叠会正常呢
                     text-align center
                     height 100%
+                }
+                .item-name {
+                    float left
+                    position relative // 为什么加了这个, 层叠会正常呢
+                    margin-left 20px
                 }
                 .indicator {
                     display block
@@ -197,6 +203,9 @@ export default {
                 }
             }
             .item:hover .indicator {
+                transform translate3d(0,0,0)
+            }
+            .item.selected .indicator{
                 transform translate3d(0,0,0)
             }
         }
