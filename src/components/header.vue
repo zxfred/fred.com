@@ -2,7 +2,7 @@
     <header class="header">
         <div class="logo"></div>
         <nav class="nav vh-center">
-            <div v-for="item in navList" :key="item.name" :class="{active : active == item.name}" class="item" @click="selectNav(item.name)">{{item.name}}
+            <div v-for="item in navList" :key="item.name" :class="{active : active === item.name}" class="item" @click="selectNav(item.name)">{{item.name}}
                 <div class="indicator"></div>
             </div>
         </nav>
@@ -45,7 +45,7 @@ export default {
                 type: 'fab',
             }],
 
-            active: '',
+            active: '首页',
         }
     },
     methods: {
