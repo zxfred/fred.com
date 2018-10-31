@@ -104,7 +104,7 @@ export default {
         selectSlide: function(color, url, index) {
             if (this.activeIndex !== index) {
                 let formerIndex = this.activeIndex
-                this.changeBgColor(color)                
+                this.changeBgColor(color)
                 this.changeBgImg(index)
                 this.changeTitle(formerIndex, index)
             }
@@ -189,6 +189,7 @@ export default {
                     float left
                     position relative // 为什么加了这个, 层叠会正常呢
                     margin-left 20px
+                    color #aaa
                 }
                 .indicator {
                     display block
@@ -201,6 +202,9 @@ export default {
                     transform translate3d(40px,0,0)
                     transition transform 500ms cubic-bezier(.215,.61,.355,1)
                 }
+            }
+            .item:hover .item-name{
+                color #fff
             }
             .item:hover .indicator {
                 transform translate3d(0,0,0)
