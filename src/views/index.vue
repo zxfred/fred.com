@@ -181,7 +181,7 @@ export default {
                     float left
                     display block
                     width 40px
-                    position relative // 为什么加了这个, 层叠会正常呢
+                    position relative // 为什么加了这个, 层叠会正常呢, 看层叠上下文
                     text-align center
                     height 100%
                 }
